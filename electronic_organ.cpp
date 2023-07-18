@@ -2,8 +2,9 @@
 #include <conio.h>
 #include<iostream>
 using namespace std;
+int rythm[7] = { 262,294,330,349,392,440,494 };
 void init() {
-	// draw the keys
+	// »­ÇÙ¼ü
 	int x = 0;
 	for (int x = 0; x < 630; x++) {
 		if (x < 90)	setlinecolor(RED);
@@ -16,45 +17,33 @@ void init() {
 		line(x, 0, x, 600);
 	}
 }
-void playmic(int n, int* rythm) {
-	fillrectangle(90 * n, 500, 90 * (n + 1), 600);//show the reaction of pressing
-	Beep(rythm[n], 500);
-	init();
+
+DWORD WINAPI playmic(char c) {
+	int n = -1;
+	if (c == 'a')	n = 0;
+	else if (c == 's')	n = 1;
+	else if (c == 'd')	n = 2;
+	else if (c == 'f')	n = 3;
+	else if (c == 'j')	n = 4;
+	else if (c == 'k')	n = 5;
+	else if (c == 'l')	n = 6;
+	else n = -1;
+	if (n != -1) {
+		fillrectangle(90 * n, 500, 90 * (n + 1), 600);//µã»÷Ð§¹û
+		Beep(rythm[n], 500);//ÀÖ·û
+		init();
+	}
+	return 0;
 }
 int main()
 {
-	int rythm[7] = { 262,294,330,349,392,440,494 };
 	initgraph(630, 600, SHOWCONSOLE);
 	init();
-	char n = ' ';
+	char c = ' ';
 	cout << "a: do	s:re	d:mi	f:fa	j:so	k:la	l:si" << endl;
 	while (1) {
-		n = _getch();
-		switch (n) {
-		case 'a'://do
-			playmic(0, rythm);
-			break;
-		case 's'://re
-			playmic(1, rythm);
-			break;
-		case 'd'://mi
-			playmic(2, rythm);
-			break;
-		case 'f'://fa
-			playmic(3, rythm);
-			break;
-		case 'j'://so
-			playmic(4, rythm);
-			break;
-		case 'k'://la
-			playmic(5, rythm);
-			break;
-		case 'l'://si
-			playmic(6, rythm);
-			break;
-		default:
-			break;
-		}
+		c = _getch();
+		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)playmic, (LPVOID)c, NULL, NULL);
 	}
 	Sleep(30000);
 	closegraph();
