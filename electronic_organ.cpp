@@ -3,7 +3,7 @@
 #include<iostream>
 using namespace std;
 void init() {
-	// »­ÇÙ¼ü
+	// draw the keys
 	int x = 0;
 	for (int x = 0; x < 630; x++) {
 		if (x < 90)	setlinecolor(RED);
@@ -17,8 +17,8 @@ void init() {
 	}
 }
 void playmic(int n, int* rythm) {
-	fillrectangle(90 * n, 500, 90 * (n + 1), 600);//µã»÷Ð§¹û
-	Beep(rythm[n], 500);//ÀÖ·û
+	fillrectangle(90 * n, 500, 90 * (n + 1), 600);//show the reaction of pressing
+	Beep(rythm[n], 500);
 	init();
 }
 int main()
