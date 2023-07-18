@@ -4,7 +4,7 @@
 using namespace std;
 int rythm[7] = { 262,294,330,349,392,440,494 };
 void init() {
-	// »­ÇÙ¼ü
+	// draw the keys
 	int x = 0;
 	for (int x = 0; x < 630; x++) {
 		if (x < 90)	setlinecolor(RED);
@@ -29,8 +29,8 @@ DWORD WINAPI playmic(char c) {
 	else if (c == 'l')	n = 6;
 	else n = -1;
 	if (n != -1) {
-		fillrectangle(90 * n, 500, 90 * (n + 1), 600);//µã»÷Ð§¹û
-		Beep(rythm[n], 500);//ÀÖ·û
+		fillrectangle(90 * n, 500, 90 * (n + 1), 600);//show the reaction of pressing the key
+		Beep(rythm[n], 500);
 		init();
 	}
 	return 0;
